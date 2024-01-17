@@ -50,6 +50,7 @@ class Tabuleiro:
         else:
             self.acertos += 1
             botaoAtual['text'] = tabuleiro_vizinhanca.vizinhanca[botaoAtual_x][botaoAtual_y]
+            info_celulas_restantes['text'] = f'Células Restantes: {self.nlin * self.ncol - self.bombas - self.acertos}'
             self.verificarVitoria(interface)
          
 class Vizinhanca(Tabuleiro):
@@ -119,4 +120,14 @@ if __name__ == "__main__":
     interface = Interface(window, tabuleiro_solucao)
     window.geometry(f'{interface.x}x{interface.y}')
 
+    window2 = Tk()
+    window2.title('Informações do Jogo')
+
+    info_bombas = Label(window2, text=f'Quantidade de bombas: {qntdBombas}')
+    info_bombas.grid(column=0, row=0, padx=10, pady=10)
+
+    info_celulas_restantes = Label(window2, text=f'Células Restantes: {dimensao[0] * dimensao[1] - qntdBombas - tabuleiro_solucao.acertos}')
+    info_celulas_restantes.grid(column=0, row=1, padx=5, pady=5)
+
     window.mainloop()
+    window2.mainloop()
