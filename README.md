@@ -9,3 +9,5 @@ No jogo, quatro opções são mostradas:
   2) Marcar Simbolo - marcar uma bomba (representado por '*') ou um simbolo vazio (representado por '-') em um indice referente às linhas e colunas.
   3) Desmarcar Simbolo - desmarcar um simbolo que foi marcado erroneamente.
   4) Sair do jogo
+
+O jogo pode ser executado também rodando o arquivo jogo_tkinter.py que executa o jogo em uma interface criada com a bib tkinter.
