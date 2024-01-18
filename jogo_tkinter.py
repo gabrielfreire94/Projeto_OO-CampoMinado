@@ -44,12 +44,14 @@ class Tabuleiro:
         botaoAtual['state'] = DISABLED
         if self.solucao[botaoAtual_x][botaoAtual_y] == '💣':
             botaoAtual['text'] = '💣'
+            botaoAtual['font'] = ('Times New Roman', 12, 'bold')
             messagebox.showinfo("Fim de Jogo", "Você atingiu uma bomba! Fim de jogo.")
             interface.destroy()
             sys.exit()
         else:
             self.acertos += 1
             botaoAtual['text'] = tabuleiro_vizinhanca.vizinhanca[botaoAtual_x][botaoAtual_y]
+            botaoAtual['font'] = ('Times New Roman', 12, 'bold')
             info_celulas_restantes['text'] = f'Células Restantes: {self.nlin * self.ncol - self.bombas - self.acertos}'
             self.verificarVitoria(interface)
          
@@ -118,15 +120,20 @@ if __name__ == "__main__":
     window = Tk()
     window.title("Campo Minado")
     interface = Interface(window, tabuleiro_solucao)
-    window.geometry(f'{interface.x}x{interface.y}')
+    larguta_tela = window.winfo_screenwidth()
+    altura_tela =  window.winfo_screenmmheight()
+    posix = round(larguta_tela/2 - interface.y/2)
+    posiy = altura_tela
+    window.geometry(f'{interface.x}x{interface.y}+{posix}+{posiy}')
 
     window2 = Tk()
     window2.title('Informações do Jogo')
+    window2.geometry(f'+{posix}+{posiy-150}')
 
-    info_bombas = Label(window2, text=f'Quantidade de bombas: {qntdBombas}')
+    info_bombas = Label(window2, text=f'Quantidade de bombas: {qntdBombas}', font=('Times New Roman', 13, 'bold'))
     info_bombas.grid(column=0, row=0, padx=10, pady=10)
 
-    info_celulas_restantes = Label(window2, text=f'Células Restantes: {dimensao[0] * dimensao[1] - qntdBombas - tabuleiro_solucao.acertos}')
+    info_celulas_restantes = Label(window2, text=f'Células Restantes: {dimensao[0] * dimensao[1] - qntdBombas - tabuleiro_solucao.acertos}', font=('Times New Roman', 13, 'bold'))
     info_celulas_restantes.grid(column=0, row=1, padx=5, pady=5)
 
     window.mainloop()
